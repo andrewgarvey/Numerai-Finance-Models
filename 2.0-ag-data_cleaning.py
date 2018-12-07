@@ -22,9 +22,7 @@ import matplotlib.pyplot as plt
 # import other packages 
 from sklearn.metrics import log_loss
 from sklearn.decomposition import PCA
-import operator
-import math    
-from MulticoreTSNE import MulticoreTSNE as TSNE
+
 #------------------------------------------------------------------------------
 # IMPORT FILES
 #setup dir
