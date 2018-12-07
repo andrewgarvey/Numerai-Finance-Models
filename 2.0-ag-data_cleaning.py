@@ -6,7 +6,7 @@ Created on Fri Dec  7
 @author: 9atg
 """
 
-#Debatable if done together or not
+#Debatable if done as group or not
 #as different models may excel with different inputs 
 #can probably find something that works for everyone,
 
@@ -40,7 +40,7 @@ t1 = dt.datetime(1968, 9, 8) # needlessly complicated seed for #learning, never 
 t2 = dt.datetime(1992,11, 7) # I just assume all your gifts got lost in the mail
 
 diff = t2-t1
-diff_sec = diff.total_seconds()
+diff_sec = int(diff.total_seconds())
 print(diff_sec)
 
 np.random.seed(diff_sec)
@@ -48,41 +48,37 @@ np.random.seed(diff_sec)
 #-----------------------------------------------------------------------------
 # STORING 
 
-# Store ID column and data_type of TEST, will want later !!  
-test_id = test.loc[:,'id']
-test_data_type = test.loc[:,'data_type']
+# Store ID/data_type/era of TEST, will want later !!  
+test_stored_cols = test.loc[:,['id','data_type','era']]
+
 #------------------------------------------------------------------------------
 #CLEANING 
 #making this unneccesary function with unneccesary loops for #learning
 
-#TAKES a list of DF , APPLIES THE SAME CLEANING (basically removing a few rows) AND THEN SPLITS X/Y, RENAMES AND OUTPUTS EVERYTHING dynamically
-both = [test,train]
+#TAKES a dict of DF , APPLIES THE SAME CLEANING (basically removing a few rows) AND THEN SPLITS X/Y, RENAMES AND OUTPUTS everything dynamically based on df names
 
-def DropSplit(list): 
-    for i in list:
-        print(i)
-        list[i]  = list[i].drop(['id','data_type'],axis=1)
-        
-        return list [i]
+both = dict(test=test,train=train)
 
+def DropSplit(dictionary):
+   for i in range(0,len(dictionary)):
+       # set var
+       name = list(dictionary.keys())[i]
+       df = dictionary[name]
+       
+       # manip var       
+       df= df.drop(['id','data_type','era'],axis=1)
+       target_index = df.columns.str.contains('target',regex=True) 
+       print(df)
+       # output var
+       #vars()['x_'+name] = df.loc[:,np.invert(target_index)]
+       #vars()['y_'+name] = df.loc[:,target_index]
+       asdf = 1
+       asdf2 = 1
+       return asdf 
+
+# use it
 DropSplit(both)
 
-
-for i in both:
-    print(i.columns())
-
-
-a = print('test','test')
-
-# Drop data_type 
-
-
-# SPLIT INTO X/Y 
-
-   
-    
-    
-    
 #------------------------------------------------------------------------------
 # FEATURE REDUCTION
 ## eg Done via primary component analysis 
