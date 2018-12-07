@@ -19,30 +19,27 @@ import matplotlib.pyplot as plt
 # import other packages 
 
 
+
+#------------------------------------------------------------------------------
+# IMPORT FILES
 #setup dir
 inputdir = 'D:\QUEENS MMAI\823 Finance\Project\Input'
 outputdir = 'D:\QUEENS MMAI\823 Finance\Project\Output'
 
-#-------------------------------------------------------------------------------
-# IMPORT FILES
 
 ## Read file(s) / directory management
 os.chdir(inputdir)
-train = pd.read_excel('A2trainData_MMAI.xlsx')
-test = pd.read_excel('A2testData_MMAI.xlsx')
+train = pd.read_csv('numerai_training_data.csv')
+test = pd.read_csv('numerai_tournament_data.csv')
 os.chdir(outputdir)
 
+#------------------------------------------------------------------------------
 
+# Basic stuff  
 
+train.describe().transpose()
 
-
-
-
-
-
-
-
-
+train.isna().sum() 
 
 
 
