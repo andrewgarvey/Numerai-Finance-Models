@@ -109,24 +109,42 @@ for i in eras.unique():
 #Boring Dataset is boring
 train.describe().transpose()
 
+
 # 1 ID, useless except they want it submitted with it
 # 1 data_type, just tells us train is train and test is validate/test/live, we will probably just use validate
 traintype = train.loc[:,'data_type']
 print(traintype.unique())
-testtype = test.loc[:,'data_type']
+testtype = test.loc[:,'data_type']  
 print(testtype.unique())
 # 50 features, 0 - 1 
 # 5 targets, 0 or 1
 
 #-----------------------------------------------------------------------------
-#not missing anything 
+#not missing in train,
 train.isna().sum() 
 
-# eras actually mildly important due to how scoring works
+test.isna().sum() 
+#figure out where the nan's are, ok its fine
+test_types = test.loc[:,'data_type']
+
+for i in test_types.unique():
+    index = i==test_types
+    series = test.loc[index,'target_bernie']
+    print(i,'--> NonNACount = ' ,len(series) , 'CountNA = ', series.isna().sum())
+
+
+
+# ERAS are still a thing,
+
 eras = train.loc[:,'era']
 print(len(eras.unique()))
 
-# cat imbalance? NOPE  
+# some have X in TEST
+eras2 = test.loc[:,'era']
+print(len(eras2.unique()))
+print(eras2.unique())
+
+# imbalance? NOPE  
 col_index = train.columns.str.contains('target',regex=True) 
 train.loc[:,col_index].mean()
 
