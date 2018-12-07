@@ -84,9 +84,9 @@ print(len(eras.unique()))
 #                 0.5*np.ones(len(df),)
 
 
-basically_a_model = 0.5*np.ones(len(test),)
+basically_a_model = 0.5*np.ones(len(train),)
 
-y_true = eras = train.loc[:,'target_bernie']
+y_true = train.loc[:,'target_bernie']
 step1check = log_loss(y_true,basically_a_model)
 print('log_loss-->', round(step1check,3))
 
@@ -127,22 +127,14 @@ test.isna().sum()
 #figure out where the nan's are, ok its fine
 test_types = test.loc[:,'data_type']
 
+
 for i in test_types.unique():
     index = i==test_types
     series = test.loc[index,'target_bernie']
-    print(i,'--> NonNACount = ' ,len(series) , 'CountNA = ', series.isna().sum())
-
-
+    eras = test.loc[index,'era']
+    print(i,': \nNonNACount = ' ,len(series) , '\nCountNA = ', series.isna().sum(),'\nUnique eras = ',eras.unique(),'\n\n')
 
 # ERAS are still a thing,
-
-eras = train.loc[:,'era']
-print(len(eras.unique()))
-
-# some have X in TEST
-eras2 = test.loc[:,'era']
-print(len(eras2.unique()))
-print(eras2.unique())
 
 # imbalance? NOPE  
 col_index = train.columns.str.contains('target',regex=True) 
@@ -151,7 +143,6 @@ train.loc[:,col_index].mean()
 #test ? still nope
 col_index = test.columns.str.contains('target',regex=True) 
 test.loc[:,col_index].mean()
-
 
 #------------------------------------------------------------------------------
 #needs more graphs i guess 
