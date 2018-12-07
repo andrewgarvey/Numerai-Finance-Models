@@ -15,9 +15,9 @@ import random as rd
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import re
 # import other packages 
-
+from sklearn.metrics import log_loss
 
 #------------------------------------------------------------------------------
 # IMPORT FILES
@@ -48,42 +48,91 @@ For this project we only care about a.
 Score to benchmark ourselves against is Log loss <0.693: 
     
 MATH ASIDE: 
-0.693 is recognizable as ln(2), so i did a quick check to see what they are actually asking for 
+0.693 is recognizable as ln(2), so i did a quick check to see what they are actually asking for... 
 
--{(y*log(p) + (1 - y)*log(1 - p))} is the formula for Log Loss (for binary catorization)
+-{(y*ln(p) + (1 - y)*ln(1 - p))} is the formula for Log Loss (for binary catorization)
 
-at p = 50% and y = 1  
+for simplicity in our case it can be reduced to 
 
-=-{(1*log(0.5)}
-= 0.693 
+= -ln(p)  
+where p is probability that you are off by (it says 0 you say 0.5, p =0.5  )
 
-same can be shown for y=0 and p =50% 
-
-Basically this just means you have to be better than Random guess as a benchmark!... but ofc it's not that easy
-
-2. Eras, there are many of them
+Realistically speaking we just barely need to beat random chance ! 
+'''
 
 
+#------------------------------------------------------------------------------
+# 2. Consitency... Required to meet this benchmark in >58% of eras
+# Eras, there are many of them , 120 to be exact 
+eras = train.loc[:,'era']
+print(len(eras.unique()))
+
+#------------------------------------------------------------------------------
+#3. You must actually use the same model for everything, 
+
+# you can't just submit several overfitted models 
+# that each do well at different eras/person
 
 
-3. You must actually use the same model for everything, you can't just submit several overfitted models that each do well 
+
+#------------------------------------------------------------------------------
+#THEREFORE....    
+#My fully functional model that passes all 3 steps is as follows ...  
+
+#                 0.5*np.ones(len(df),)
+
+
+basically_a_model = 0.5*np.ones(len(test),)
+
+y_true = eras = train.loc[:,'target_bernie']
+step1check = log_loss(y_true,basically_a_model)
+print('log_loss-->', round(step1check,3))
 
 
 
+#applies to any and all eras >58% of the time
+for i in eras.unique():
+    index = eras==i
+    y_true = train.loc[index,'target_bernie']
+    basically_a_model = 0.5*np.ones(len(y_true),)
+    print('for ',i,' log_loss-->',round(log_loss(y_true,basically_a_model),3))
 
+# and is ofc the same model each time. 
+    
 
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# Actual Data stuff,
+
+#Boring Dataset is boring
+train.describe().transpose()
+
+#not missing anything 
+train.isna().sum() 
+
+#actually mildly important due to how scoring works
+eras = train.loc[:,'era']
+print(len(eras.unique()))
+
+# cat imbalance? NOPE  
+col_index = train.columns.str.contains('target',regex=True) 
+train.loc[:,col_index].mean()
+
+#test ? still nope
+col_index = test.columns.str.contains('target',regex=True) 
+test.loc[:,col_index].mean()
 
 
 '''
-train.describe().transpose()
+NOTES
 
-train.isna().sum() 
+- CV splits by Era.. worth looking at
+- some non PCA based thing probably, although the CAC is great
+- a good way to do multi-classification
+- NN would be fun i think 
+- no imbalance
 
-eras = train.loc[:,'era']
-len(eras.unique())
-
-
-
+'''
 
 
 
