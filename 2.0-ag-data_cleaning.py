@@ -36,12 +36,29 @@ os.chdir(outputdir)
 
 
 #-----------------------------------------------------------------------------
-# Drop useless ID columns as well as data_type, split up 
+# CLEANING 
 
-# some non PCA based thing probably, although the CAC is great
-- a good way to do multi-classification
-- NN would be fun i think 
-- no imbalance
+# Seed
+seed = 19680908
+np.random.seed(seed)
+
+# Everything is normalized nice and neatly
+# Store ID column, technically NMR wants outputs in terms of this... ok 
+
+
+for df in (test,train):
+     df = df.drop('id',axis =1)
+     
+
+
+# Drop data_type 
+
+#------------------------------------------------------------------------------
+# ADDING VALUE, pretty sure basics aren't gonna cut it 
+
+# Dimensionality increase?, PCA isn't going to work well given ERAS as a constraint    
+
+#
 
 
 
@@ -54,8 +71,8 @@ os.chdir(outputdir)
 
 '''
 NOTES 
-- ASK ME MORE FUCKING QUESTIONS!!! I don't like that i generally feel compelled to pick my own model everytime  
-
+-  
+-
 
 
 '''

@@ -158,6 +158,7 @@ plt.savefig('1.0-ag-Correlation Matrix.png')
 '''
 Model NOTES
 
+- few useless cols, order should be maintained the whole way if they want them back for w/e reason
 - CV splits by Era.. worth looking at
 - some non PCA based thing probably, although the CAC is great
 - a good way to do multi-classification
