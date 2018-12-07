@@ -55,29 +55,23 @@ test_stored_cols = test.loc[:,['id','data_type','era']]
 #CLEANING 
 #making this unneccesary function with unneccesary loops for #learning
 
-#TAKES a dict of DF , APPLIES THE SAME CLEANING (basically removing a few rows) AND THEN SPLITS X/Y, RENAMES AND OUTPUTS everything dynamically based on df names
+#APPLIES THE SAME CLEANING (basically removing a few rows) AND THEN SPLITS X/Y, RENAMES AND OUTPUTS everything dynamically based on df names
+
+x_train = [] # BECAUSE CODE ANALYSIS IS THE BANE OF MY EXISTENCE 
 
 both = dict(test=test,train=train)
-
-def DropSplit(dictionary):
-   for i in range(0,len(dictionary)):
-       # set var
-       name = list(dictionary.keys())[i]
-       df = dictionary[name]
-       
-       # manip var       
-       df= df.drop(['id','data_type','era'],axis=1)
-       target_index = df.columns.str.contains('target',regex=True) 
-       print(df)
-       # output var
-       #vars()['x_'+name] = df.loc[:,np.invert(target_index)]
-       #vars()['y_'+name] = df.loc[:,target_index]
-       asdf = 1
-       asdf2 = 1
-       return asdf 
-
-# use it
-DropSplit(both)
+for i in range(0,len(both)):
+   # set var
+   name = list(both.keys())[i]
+   df = both[name]
+   
+   # manip var       
+   df= df.drop(['id','data_type','era'],axis=1)
+   target_index = df.columns.str.contains('target',regex=True) 
+   print(df)
+   # output var
+   vars()['x_'+name] = df.loc[:,np.invert(target_index)]
+   vars()['y_'+name] = df.loc[:,target_index]
 
 #------------------------------------------------------------------------------
 # FEATURE REDUCTION
@@ -89,8 +83,9 @@ covar_mat.fit(x_train)
 
 variance = covar_mat.explained_variance_ratio_
 var = np.cumsum(np.round(variance,3))
-var
+print(var)
 
+#can get 99% info with only ~33 variables 
 #plot explained variance
 plt.clf
 plt.ylabel(' variance explained')
@@ -100,11 +95,11 @@ plt.plot(var)
 plt.savefig('variance vs # features.png')
 
 
-## RFE/PCA/LDA isn't going to work well given our constraints
+## RFE/PCA/ isn't going to work well given our constraints......
 
-#FEATURE SELECTION ? 
-
-# ADDING VALUE, pretty sure basics aren't gonna cut it when dealing with actual competitions, 
+#------------------------------------------------------------------------------
+ # FEATURE ADDITION?!?!?!?!
+ # ADDING VALUE, pretty sure basics aren't gonna cut it when dealing with actual competitions 
 
 
 # Dimensionality increase via tSNE? 
