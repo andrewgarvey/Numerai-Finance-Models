@@ -22,6 +22,9 @@ import matplotlib.pyplot as plt
 # import other packages 
 from sklearn.metrics import log_loss
 from sklearn.decomposition import PCA
+import operator
+import math    
+from MulticoreTSNE import MulticoreTSNE as TSNE
 #------------------------------------------------------------------------------
 # IMPORT FILES
 #setup dir
@@ -98,15 +101,7 @@ plt.savefig('variance vs # features.png')
 ## RFE/PCA/ isn't going to work well given our constraints......
 
 #------------------------------------------------------------------------------
- # FEATURE ADDITION?!?!?!?!
- # ADDING VALUE, pretty sure basics aren't gonna cut it when dealing with actual competitions 
-
-
-# Dimensionality increase via tSNE? 
-
-
-
-
+ # FEATURE ADDITION?!?!?!?!, idk data is probably fine
 
 '''
 NOTES 
