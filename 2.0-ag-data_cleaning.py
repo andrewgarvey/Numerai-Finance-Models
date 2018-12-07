@@ -36,9 +36,12 @@ os.chdir(outputdir)
 
 
 #-----------------------------------------------------------------------------
+# Drop useless ID columns as well as data_type, split up 
 
-
-
+# some non PCA based thing probably, although the CAC is great
+- a good way to do multi-classification
+- NN would be fun i think 
+- no imbalance
 
 
 
