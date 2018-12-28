@@ -37,7 +37,7 @@ test = pd.read_csv('numerai_tournament_data.csv')
 os.chdir(outputdir)
 
 # Seed
-t1 = dt.datetime(1968, 9, 8) # needlessly complicated seed for #learning, never actually do this, dates are a $#!@  https://xkcd.com/927/
+t1 = dt.datetime(2000,11, 7) # needlessly complicated seed for #learning, never actually do this, dates are a $#!@  https://xkcd.com/927/
 t2 = dt.datetime(1992,11, 7) # I just assume all your gifts got lost in the mail
 
 diff = t2-t1
