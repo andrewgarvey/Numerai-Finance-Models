@@ -2,9 +2,7 @@
 """
 Created on Thu Dec  6 18:39:52 2018
 
-This one is some preleminary stuff about 823 Project Data, specifically the 
-
-@author: 9atg
+@author: andrew garvey
 
 """
 
