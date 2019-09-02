@@ -58,7 +58,7 @@ test_stored_cols = test.loc[:,['id','data_type','era']]
 
 #APPLIES THE SAME CLEANING (basically removing a few rows) AND THEN SPLITS X/Y, RENAMES AND OUTPUTS everything dynamically based on df names
 
-x_train = [] # BECAUSE CODE ANALYSIS IS THE BANE OF MY EXISTENCE 
+x_train = [] 
 
 both = dict(test=test,train=train)
 for i in range(0,len(both)):
