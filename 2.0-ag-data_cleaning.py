@@ -97,13 +97,3 @@ plt.savefig('variance vs # features.png')
 
 
 ## RFE/PCA/ isn't going to work well given our constraints......
-
-#------------------------------------------------------------------------------
- # FEATURE ADDITION?!?!?!?!, idk data is probably fine
-
-'''
-NOTES 
--  NN, RF, or some combo modeling (bagging, boosting)  gonna give best results
-
-
-'''
