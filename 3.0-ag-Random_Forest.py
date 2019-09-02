@@ -6,8 +6,6 @@ Highly based off of the script from Sakib
 
 @author: 9atg
 """
-# In[1]:
-
 
 # import standard libraries
 import numpy as np
@@ -16,24 +14,15 @@ import pandas as pd
 import time
 
 
-# In[2]:
-
-
 # import modelling libraries
 from sklearn import linear_model, model_selection
 import numerox as nx
-
-
-# In[3]:
 
 
 # set the data working directory
 inputdir = 'D:\QUEENS MMAI\823 Finance\Project\Input'
 outputdir = 'D:\QUEENS MMAI\823 Finance\Project\Output'
 os.chdir(inputdir)
-
-# In[4]:
-
 
 # download the latest numerai dataset
 data = nx.download("numerai_dataset.zip")
@@ -42,16 +31,10 @@ data = nx.download("numerai_dataset.zip")
 #data = nx.load_zip("numerai_datasets.zip")
 
 os.chdir(outputdir)
-# In[5]:
-
 
 # environment settings
 MODEL_NAME = "logistic-regression"
 FOLDER_NAME = "submission"
-
-
-# In[6]:
-
 
 # extend the logistic model class offered by numerox
 class logistic(nx.Model):
@@ -67,49 +50,25 @@ class logistic(nx.Model):
         yhat = model.predict_proba(dpre.x)[:, 1]
         return dpre.ids, yhat
 
-
-# In[7]:
-
-
 # parameters required for hyper-tuning the model
 C = [0.0001, 0.001, 0.01]
 solver = ["newton-cg", "lbfgs", "sag", "saga"]
 multi_class = ["ovr", "multinomial", "auto"]
-
-
-# In[8]:
-
 
 # combination of parameters
 parameters = {'C': C,
              'solver': solver,
              'multi_class': multi_class}
 
-
-# In[9]:
-
-
 # use grid search cv to find the best parameters
 train_data = pd.read_csv(os.path.join(os.getcwd(), "numerai_dataset", "numerai_training_data.csv"), header=0)
 X = np.array(train_data.loc[:, :"feature50"])
 
-
-# In[10]:
-
-
 # list of tournaments
 tournaments = ["bernie", "elizabeth", "jordan", "ken", "charles", "frank", "hillary"]
 
-
-# In[11]:
-
-
 # set the directory to save the submissions
 os.chdir(os.path.join(os.getcwd(), "..", "modelling", FOLDER_NAME, MODEL_NAME))
-
-
-# In[ ]:
-
 
 # define kfold cross validation split
 kfold_split = 5
