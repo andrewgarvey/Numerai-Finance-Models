@@ -1,2 +1,0 @@
-# prevent git from erroneously thinking this is a jupyter based directory
-.ipynb linguist-documentation
