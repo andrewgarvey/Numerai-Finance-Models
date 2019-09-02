@@ -9,10 +9,10 @@ Languages: Python, Jupyter Notebook
 ---
 Purpose:
 
-Exploring Data file with Visualizations
+-Exploring Data file with Visualizations
 
-Cleaning files for ML 
+-Cleaning files for ML 
 
-Use Random Forest to predict bankrupcy
+-Trying various models to get min log loss 
 
 
