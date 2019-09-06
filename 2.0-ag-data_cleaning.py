@@ -2,8 +2,6 @@
 """
 Created on Fri Dec  7 
 
- Some basic data cleaning for the model preperation.
-@author: 9atg
 """
 
 #Debatable if done as group or not
