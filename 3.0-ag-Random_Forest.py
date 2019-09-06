@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Random Forest Numerai Model 
-@author: 9atg
 """
 
 # import standard libraries
