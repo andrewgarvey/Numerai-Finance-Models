@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Dec  6 18:39:52 2018
-
-@author: andrew garvey
-
 """
 
 #import standard packages
